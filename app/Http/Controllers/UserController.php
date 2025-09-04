@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterUserRequest;
 
 class UserController extends Controller
 {
-    public function register (Request $request) {
-        $incommingFields = $request->validate([
-            'name' => ['required', 'min:4', 'max:25'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:8', 'max:15']
-        ]);
+    public function register(RegisterUserRequest $request) {
+        $validated = $request->validated();
         return "Hello from User Contoller";
     }
 }
