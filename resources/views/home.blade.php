@@ -11,6 +11,7 @@
     <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; max-width: 20rem;">
         <h2>Register as a User</h2>
         <form action="/register" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
+            @csrf
             <input type="text" name="name" placeholder="Name">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
