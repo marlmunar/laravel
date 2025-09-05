@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,19 @@ class UserController extends Controller
 
     public function logout() {
         Auth::logout();
+        return redirect('/');
+    }
+
+    public function login(LoginUserRequest $request) {
+        $validated = $request->validated();
+
+        if (Auth::attempt([
+            'email' => $validated["userEmail"], 
+            'password' => $validated["userPassword"]
+        ])) {
+            $request->session()->regenerate();
+        }
+
         return redirect('/');
     }
 }
