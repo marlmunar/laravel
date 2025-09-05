@@ -10,9 +10,12 @@
 
     @auth
     <p>You are now logged in</p>
+    <form action="/logout" method="POST">
+        @csrf
+        <button>Log Out</button>
+    </form>
 
     @else
-    
     <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; max-width: 20rem;">
         <h2>Register as a User</h2>
         <form action="/register" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
