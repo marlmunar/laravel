@@ -8,6 +8,11 @@
 <body style="padding: 0.5rem;">
     <h1>Home Page</h1>
 
+    @auth
+    <p>You are now logged in</p>
+
+    @else
+    
     <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; max-width: 20rem;">
         <h2>Register as a User</h2>
         <form action="/register" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
@@ -18,5 +23,6 @@
             <input type="submit" value="Register">
         </form>
     </section>
+    @endauth
 </body>
 </html>
