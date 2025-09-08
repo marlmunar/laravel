@@ -15,6 +15,16 @@
         <button>Log Out</button>
     </form>
 
+     <section style="margin-top: 1rem; padding: 1rem; border: 2px solid black; border-radius: 1rem; max-width: 20rem;">
+        <h2>Create a Post</h2>
+        <form action="/create-post" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
+            @csrf
+            <input type="text" name="title" placeholder="Your Post Title"/>
+            <textarea name="body" placeholder="Your Post Content"></textarea>
+            <input type="submit" value="Save Post"/>
+        </form>
+    </section>
+
     @else
     <div style="display: flex; gap: 1rem;">
         <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; min-width: 15rem;">
