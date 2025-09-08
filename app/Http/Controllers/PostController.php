@@ -10,6 +10,14 @@ use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
+    public function deletePost(Post $post) {
+        if(Auth::user()->id === $post->user_id) {
+            $post->delete();
+        }
+
+        return redirect('/');
+    }
+    
     public function updatePost(Post $post, UpdatePostRequest $request) {
         if(Auth::user()->id !== $post->user_id) {
             return redirect('/');
