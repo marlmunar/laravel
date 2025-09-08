@@ -29,7 +29,7 @@
         <h2>Your Posts</h2>
        @foreach ($posts as $post)
        <div style="background-color: #e6e6e6; border-radius: 0.5rem; padding: 0.5rem; margin: 0.5rem 0">
-        <h3>{{$post->title}}</h3>
+        <h3>{{$post->title}} by {{$post->author->name}}</h3>
         <p style="padding: 0 0.25rem;">{{$post->body}}</p>
         <div style="display: flex; gap:0.25rem;">
             <button><a href="/edit-post/{{$post->id}}" style="text-decoration: none; color: inherit;">Edit</a></button>
