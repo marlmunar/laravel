@@ -15,7 +15,8 @@
         <button>Log Out</button>
     </form>
 
-     <section style="margin-top: 1rem; padding: 1rem; border: 2px solid black; border-radius: 1rem; max-width: 20rem;">
+   <div style="display: flex; gap: 2.5rem; margin-top: 1rem;">
+     <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; min-width: 20rem; max-height: min-content">
         <h2>Create a Post</h2>
         <form action="/create-post" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
             @csrf
@@ -24,6 +25,16 @@
             <input type="submit" value="Save Post"/>
         </form>
     </section>
+    <section style="flex: 1; padding-right: 2rem;">
+        <h2>Your Posts</h2>
+       @foreach ($posts as $post)
+       <div style="background-color: #e6e6e6; border-radius: 0.5rem; padding: 0.5rem; margin: 0.5rem 0">
+        <h3>{{$post['title']}}</h3>
+        <p style="padding: 0 0.5rem;">{{$post['body']}}</p>
+       </div>
+       @endforeach
+    </section>
+   </div>
 
     @else
     <div style="display: flex; gap: 1rem;">
