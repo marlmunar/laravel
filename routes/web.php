@@ -13,9 +13,12 @@ Route::get('/', function () {
 
     //getPostsSpecifictoUser
     // $posts = Post::where("user_id", Auth::id())->get();
-    $posts = auth()->user()->userPosts()->latest()->get();
+    $posts = [];
+    if(Auth::check()) {
+        $posts = Auth::user()->userPosts()->latest()->get();
+    }
 
-    return view('home', ['posts'=> $posts]);
+    return view('home', ['posts' => $posts]);
 });
 
 Route::post('/register', [UserController::class, 'register']);
@@ -23,3 +26,5 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::post('/create-post', [PostController::class, 'createPost']);
+Route::get('/edit-post/{post}', [PostController::class, 'getEditScreen']);
+Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
