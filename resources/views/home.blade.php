@@ -1,71 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>{{ env('APP_NAME') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body style="padding: 0.5rem;">
-    <h1>Home Page</h1>
+
+<body class="p-2">
+    <h1 class="page-title">Home Page Test</h1>
 
     @auth
-    <p>You are now logged in</p>
-    <form action="/logout" method="POST">
-        @csrf
-        <button>Log Out</button>
-    </form>
-
-   <div style="display: flex; gap: 2.5rem; margin-top: 1rem;">
-    <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; min-width: 20rem; max-height: min-content">
-        <h2>Create a Post</h2>
-        <form action="/create-post" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
-            @csrf
-            <input type="text" name="title" placeholder="Your Post Title"/>
-            <textarea name="body" placeholder="Your Post Content"></textarea>
-            <input type="submit" value="Save Post"/>
-        </form>
-    </section>
-    <section style="flex: 1; padding-right: 2rem;">
-        <h2>Your Posts</h2>
-       @foreach ($posts as $post)
-       <div style="background-color: #e6e6e6; border-radius: 0.5rem; padding: 0.5rem; margin: 0.5rem 0">
-        <h3>{{$post->title}} by {{$post->author->name}}</h3>
-        <p style="padding: 0 0.25rem;">{{$post->body}}</p>
-        <div style="display: flex; gap:0.25rem;">
-            <button><a href="/edit-post/{{$post->id}}" style="text-decoration: none; color: inherit;">Edit</a></button>
-            <form action="/delete-post/{{$post->id}}" method="POST">
+        <div class="flex items-center gap-2 py-2">
+            <p class="text-sm">You are now logged in</p>
+            <form action="/logout" method="POST">
                 @csrf
-                @method('DELETE')
-                <input type="submit" value="Delete"/>
+                <button class="bg-gray-700 text-white p-1 px-2 rounded">Log Out</button>
             </form>
         </div>
-       </div>
-       @endforeach
-    </section>
-   </div>
 
+        <div class="flex gap-4">
+            <section class="form-container w-[30%]">
+                <h2 class="form-header">Create a Post</h2>
+                <form action="/create-post" method="POST" class="flex flex-col gap-2">
+                    @csrf
+                    <div class="flex flex-col gap-1 *:border-gray-200 *:bg-gray-100 *:p-1 *:border *:rounded *:text-sm">
+                        <input type="text" name="title" placeholder="Your Post Title" />
+                        <textarea name="body" placeholder="Your Post Content"></textarea>
+                    </div>
+                    <button class="form-btn">Save Post</button>
+                </form>
+            </section>
+            <section class="w-full bg-gray-200 rounded p-2">
+                <h2 class="text-3xl font-semibold mb-4">Your Posts</h2>
+                @foreach ($posts as $post)
+                    <div class="p-2 bg-gray-100 rounded mb-2 w-full space-y-2">
+                        <h3 class="text-xl">{{ $post->title }} by {{ $post->author->name }}</h3>
+                        <p class="px-1">{{ $post->body }}</p>
+                        <div class="flex gap-1">
+                            <button class="form-btn min-w-24"><a href="/edit-post/{{ $post->id }}">Edit</a></button>
+                            <form action="/delete-post/{{ $post->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="form-btn min-w-24">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </section>
+        </div>
     @else
-    <div style="display: flex; gap: 1rem;">
-        <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; min-width: 15rem;">
-            <h2>Register as a User</h2>
-            <form action="/register" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
-                @csrf
-                <input type="text" name="name" placeholder="Name">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Password">
-                <input type="submit" value="Register">
-            </form>
-        </section>
-        <section style="padding: 1rem; border: 2px solid black; border-radius: 1rem; min-width: 15rem;">
-            <h2>Log In with an Account</h2>
-            <form action="/login" method="POST" style="display: flex; flex-direction: column; gap: 0.5rem; ">
-                @csrf
-                <input type="email" name="userEmail" placeholder="Email">
-                <input type="password" name="userPassword" placeholder="Password">
-                <input type="submit" value="Login">
-            </form>
-        </section>
-    </div>
+        <div class="flex gap-2 w-[60%]">
+            <section class="form-container w-full">
+                <h2 class="form-header">Register as a User
+                </h2>
+                <form action="/register" method="POST" class="flex flex-col gap-2">
+                    @csrf
+                    <div class="flex flex-col gap-1 *:border-gray-200 *:bg-gray-100 *:p-1 *:border *:rounded *:text-sm">
+                        <input type="text" name="name" placeholder="Name">
+                        <input type="email" name="email" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <button class="form-btn">Register</button>
+                </form>
+            </section>
+            <section class="form-container w-full">
+                <h2 class="form-header ">Log In with an Account</h2>
+                <form action="/login" method="POST" class="flex flex-col gap-2">
+                    @csrf
+                    <div class="flex flex-col gap-1 *:border-gray-200 *:bg-gray-100 *:p-1 *:border *:rounded *:text-sm">
+                        <input type="email" name="userEmail" placeholder="Email">
+                        <input type="password" name="userPassword" placeholder="Password">
+                    </div>
+                    <button class="form-btn">Log in</button>
+                </form>
+            </section>
+        </div>
     @endauth
 </body>
+
 </html>

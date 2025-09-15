@@ -1,20 +1,19 @@
 <?php
 
-use App\Models\Post;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\VarDumper\VarDumper;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    //getAllPosts
+    // getAllPosts
     // $posts = Post::all();
 
-    //getPostsSpecifictoUser
+    // getPostsSpecifictoUser
     // $posts = Post::where("user_id", Auth::id())->get();
     $posts = [];
-    if(Auth::check()) {
+    if (Auth::check()) {
         $posts = Auth::user()->userPosts()->latest()->get();
     }
 
