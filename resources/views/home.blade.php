@@ -1,6 +1,6 @@
 {{-- @extends('layout')
 @section('main') --}}
-<x-layout>
+<x-layout title="Home Page">
     <h1 class="page-title">Home Page Test</h1>
 
     @auth
