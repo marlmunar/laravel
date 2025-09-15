@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ env('APP_NAME') }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body class="p-2">
+{{-- @extends('layout')
+@section('main') --}}
+<x-layout>
     <h1 class="page-title">Home Page Test</h1>
 
     @auth
@@ -78,6 +70,5 @@
             </section>
         </div>
     @endauth
-</body>
-
-</html>
+</x-layout>
+{{-- @endsection --}}
